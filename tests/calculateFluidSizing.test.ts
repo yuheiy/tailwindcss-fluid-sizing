@@ -104,6 +104,16 @@ describe('normal cases', () => {
       },
       'clamp(24px, 3.125vw, 32px)',
     ],
+    [
+      'truncate number of decimals',
+      {
+        // prettier-ignore
+        from: { screen: new UnitValue( 768, 'px'), size: new UnitValue(1.123456789, 'px') },
+        // prettier-ignore
+        to:   { screen: new UnitValue(1280, 'px'), size: new UnitValue(2.123456789, 'px') },
+      },
+      'clamp(1.123px, 0.195vw - 0.377px, 2.123px)',
+    ],
   ])('%s', (_name, input, expected) => {
     const calculated = calculateFluidSizing(input);
     if (!calculated.success) throw new Error('Invariant failed');
@@ -121,7 +131,7 @@ describe('normal cases', () => {
       10,
     );
     if (!calculated.success) throw new Error('Invariant failed');
-    expect(calculated.value).toBe('clamp(2rem, 3.90625vw - 1rem, 4rem)');
+    expect(calculated.value).toBe('clamp(2rem, 3.906vw - 1rem, 4rem)');
   });
 
   test("change 'rootFontSize' and using rem unit for 'screen's", () => {
@@ -135,7 +145,7 @@ describe('normal cases', () => {
       10,
     );
     if (!calculated.success) throw new Error('Invariant failed');
-    expect(calculated.value).toBe('clamp(2rem, 3.90625vw - 1rem, 4rem)');
+    expect(calculated.value).toBe('clamp(2rem, 3.906vw - 1rem, 4rem)');
   });
 });
 

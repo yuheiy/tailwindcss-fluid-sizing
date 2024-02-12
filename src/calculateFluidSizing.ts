@@ -1,6 +1,10 @@
 import { UnitValue } from './UnitValue';
 import { Result } from './types';
 
+function truncate(n: number) {
+  return Number(n.toFixed(3));
+}
+
 // https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/
 export function calculateFluidSizing(
   {
@@ -73,14 +77,14 @@ export function calculateFluidSizing(
   function withUnit(value: number) {
     switch (from.size.unit) {
       case 'px':
-        return `${value}px`;
+        return `${truncate(value)}px`;
 
       case 'rem':
-        return `${value / rootFontSizePixel}rem`;
+        return `${truncate(value / rootFontSizePixel)}rem`;
     }
   }
 
-  let clampValue = `${v}vw`;
+  let clampValue = `${truncate(v)}vw`;
   if (r !== 0) {
     clampValue += ` ${Math.sign(r) >= 0 ? '+' : '-'} ${withUnit(Math.abs(r))}`;
   }
