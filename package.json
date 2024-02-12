@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-fluid-sizing",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A plugin for Tailwind CSS that provides utilities for fluid sizings.",
   "homepage": "https://github.com/yuheiy/tailwindcss-fluid-sizing",
   "bugs": {
