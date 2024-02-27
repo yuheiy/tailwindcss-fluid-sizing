@@ -14,21 +14,24 @@ export class UnitValue {
 }
 
 export function parseUnitValueString(input: string): Result<UnitValue, true> {
-  const pattern = /^([+-]?[0-9]*\.?[0-9]+)(px|rem)$/;
-  const match = input.match(pattern);
+  const value = parseFloat(input);
+  const [, unit] = input.match(/([a-z]+)/$);
 
-  if (!match) {
-    return {
-      success: false,
-      error: true,
-    };
-  }
+  // const pattern = /^([+-]?[0-9]*\.?[0-9]+)(px|rem)$/;
+  // const match = input.match(pattern);
 
-  const value = parseFloat(match[1]!);
-  const unit = match[2] as 'px' | 'rem';
+  // if (!match) {
+  //   return {
+  //     success: false,
+  //     error: true,
+  //   };
+  // }
 
-  return {
-    success: true,
-    value: new UnitValue(value, unit),
-  };
+  // const value = parseFloat(match[1]!);
+  // const unit = match[2] as 'px' | 'rem';
+
+  // return {
+  //   success: true,
+  //   value: new UnitValue(value, unit),
+  // };
 }

@@ -4,11 +4,12 @@ import { CSSRuleObject, PluginAPI } from 'tailwindcss/types/config';
 import { calculateFluidSizing } from './calculateFluidSizing';
 import evaluateTailwindFunctions from './evaluateTailwindFunctions';
 import { parseInput } from './parseInput';
-import { sizingUtilities } from './sizingUtilities';
+import { SizingProperties, SizingTransformer, sizingUtilities } from './sizingUtilities';
 
 const defaultOptions = {
   screens: {},
   rootFontSizePixel: 16,
+  useLogicalUnits: false, // use `vi` instead of `vw`
 };
 
 const fluidSizing = plugin.withOptions<{
@@ -26,9 +27,7 @@ const fluidSizing = plugin.withOptions<{
 
       function createUtilityRule(
         classPrefix: string,
-        propertiesOrTransformer:
-          | (string | [string, string | CSSRuleObject])[]
-          | ((api: PluginAPI) => (value: string) => CSSRuleObject),
+        propertiesOrTransformer: SizingProperties | SizingTransformer,
       ) {
         return (value_: string | string[]) => {
           let value = Array.isArray(value_) ? value_.join(',') : value_;
@@ -40,7 +39,12 @@ const fluidSizing = plugin.withOptions<{
             return { '--': value } as CSSRuleObject;
           }
 
-          // FIXME: If the `value` is passed from a configured theme, it is not possible to accurately compute the classname.
+          /**
+           * FIXME: The class name cannot be accurately calculated in the following cases:
+           * - If modifiers are used.
+           * - If prefix is specificated.
+           * - If the `value` is passed from a configured theme.
+           */
           const candidate = `fluid-${classPrefix}-[${value.replaceAll(' ', '_')}]`;
 
           const parsed = parseInput(value, options.screens);
@@ -80,7 +84,7 @@ const fluidSizing = plugin.withOptions<{
       }
 
       for (const [themeKey, utilityVariations] of Object.values(sizingUtilities)) {
-        for (let utilityVariation of utilityVariations) {
+        for (const utilityVariation of utilityVariations) {
           matchUtilities(
             Object.fromEntries(
               utilityVariation.map(([classPrefix, propertiesOrTransformer]) => [

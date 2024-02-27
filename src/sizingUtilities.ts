@@ -434,14 +434,8 @@ export const sizingUtilities = {
   ],
 } as const satisfies Record<
   string,
-  [
-    string | undefined,
-    [
-      string,
-      (
-        | (string | [string, string | CSSRuleObject])[]
-        | ((api: PluginAPI) => (value: string) => CSSRuleObject)
-      ),
-    ][][],
-  ]
+  [string | undefined, [string, SizingProperties | SizingTransformer][][]]
 >;
+
+export type SizingProperties = (string | [string, string | CSSRuleObject])[];
+export type SizingTransformer = (api: PluginAPI) => (value: string) => CSSRuleObject | null;

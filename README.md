@@ -1,3 +1,7 @@
+TODO: コード例を全て `640px_32px,1536px_64px`にする
+TODO: postcss-pxtoremを紹介する https://github.com/cuth/postcss-pxtorem
+TODO: 段階的にfluidになるパターンを紹介する `fluid-mt-[sm_24px,lg_32px] lg:fluid-mt-[lg_64px,xl_128px]`
+
 # tailwindcss-fluid-sizing
 
 A plugin for Tailwind CSS **v3.3.3+** that provides utilities for fluid sizings, a technique such as that known as _[fluid typography](https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/)_.
@@ -55,7 +59,7 @@ Those arguments indicate a `font-size` transition from `32px` at a viewport widt
 }
 ```
 
-To check the supported utility classes, please see [`src/sizingUtilities.ts`](src/sizingUtilities.ts).
+To check the supported utility classes, please refer to [`src/sizingUtilities.ts`](src/sizingUtilities.ts).
 
 ### Using rem unit
 
@@ -80,7 +84,7 @@ By setting `screens` in the plugin options, you can use keyword values instead o
 ```html
 <h1 class="fluid-text-[768px_32px,1280px_64px]">tailwindcss-fluid-sizing</h1>
 <!-- ↑ is equivalent to ↓ -->
-<h1 class="fluid-text-[md_32px,xl_64px]">tailwindcss-fluid-sizing</h1>
+<h1 class="fluid-text-[md_32px,lg_64px]">tailwindcss-fluid-sizing</h1>
 ```
 
 In your `tailwind.config.js` file:
@@ -94,7 +98,7 @@ module.exports = {
     require('tailwindcss-fluid-sizing')({
       screens: {
         md: '768px',
-        xl: '1280px',
+        lg: '1280px',
       },
     }),
     // ...
@@ -176,7 +180,7 @@ This makes it possible to use it as follows:
 <h1 class="fluid-text-string">tailwindcss-fluid-sizing</h1>
 ```
 
-To check the theme keys corresponding to the utility classes, please see [`src/sizingUtilities.ts`](src/sizingUtilities.ts).
+To check which the theme keys corresponds to the utility classes, please refer to [`src/sizingUtilities.ts`](src/sizingUtilities.ts).
 
 ### Adjusting the root `font-size`
 

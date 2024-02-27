@@ -1,5 +1,5 @@
 import { UnitValue, parseUnitValueString } from './UnitValue';
-import { Result } from './types';
+import type { Result } from './types';
 
 export function parseInput(
   input: string,

@@ -84,13 +84,13 @@ export function calculateFluidSizing(
     }
   }
 
-  let clampValue = `${truncate(v)}vw`;
+  let central = `${truncate(v)}vw`;
   if (r !== 0) {
-    clampValue += ` ${Math.sign(r) >= 0 ? '+' : '-'} ${withUnit(Math.abs(r))}`;
+    central += ` ${Math.sign(r) >= 0 ? '+' : '-'} ${withUnit(Math.abs(r))}`;
   }
 
   return {
     success: true,
-    value: `clamp(${[withUnit(min), clampValue, withUnit(max)].join(', ')})`,
+    value: `clamp(${[withUnit(min), central, withUnit(max)].join(', ')})`,
   };
 }
