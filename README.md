@@ -1,3 +1,9 @@
+<!-- prettier-ignore -->
+> [!CAUTION]
+> This project is now **deprecated**. Use [postcss-fluid-sizing-function](https://github.com/yuheiy/postcss-fluid-sizing-function) instead.
+
+---
+
 # tailwindcss-fluid-sizing
 
 A plugin for Tailwind CSS **v3.3.3+** that provides utilities for fluid sizings, a technique such as that known as _[fluid typography](https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/)_.
